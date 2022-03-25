@@ -4,8 +4,11 @@ Due to required build context, all scripts should be executed from the root dire
 
 ## Building the container
 
+If you don't know how to build the Linux Tentacle package, you can just download whatever is the latest version online https://octopus.com/downloads/tentacle/6.1.1320#linux and copy it to the `_artifacts\deb` directory.
+
 ```plaintext
-docker build --tag octopusdeploy/tentacle-prerelease:3.15.8 --build-arg OctopusVersion=latest --file Tentacle\Dockerfile .
+docker build --tag gastonbot/vpworker:6.1.1320 --file docker\linux\Dockerfile --build-arg BUILD_NUMBER=6.1.1320 --build-arg BUILD_DATE=20220325 .
+# docker build --tag octopusdeploy/tentacle-prerelease:3.15.8 --build-arg OctopusVersion=latest --file Tentacle\Dockerfile .
 ```
 
 ## Running a Tentacle: Docker compose
