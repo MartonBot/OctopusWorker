@@ -4,9 +4,33 @@ ARG BUILD_NUMBER
 ARG BUILD_DATE
 
 RUN apt-get update && \
-    apt-get install -y curl sudo dos2unix jq && \
+    apt-get install -y curl sudo dos2unix jq apt-utils wget apt-transport-https ca-certificates curl && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# Download the Microsoft repository GPG keys
+RUN wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb
+
+# Register the Microsoft repository GPG keys, update and install PowerShell
+RUN sudo dpkg -i packages-microsoft-prod.deb
+RUN sudo apt-get update
+RUN sudo apt-get install -y powershell
+
+# Install az module
+RUN pwsh -Command "& {Install-Module az -Scope AllUsers -Force}" > /tmp/azModuleInstall.log
+
+# Install Az cli
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+# Download the Google Cloud public signing key
+RUN sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+
+# Add the Kubernetes apt repository, update and install kubectl
+RUN echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+RUN sudo apt-get update
+RUN sudo apt-get install -y kubectl
+
+# end of software installation
 
 EXPOSE 10933
 
