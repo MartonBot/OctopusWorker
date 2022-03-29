@@ -52,7 +52,7 @@ docker run --publish 10931:10933 --tty --interactive --env "ListeningPort=10931"
 - **Space**: The name of the space which the Tentacle will be added to. Defaults to the default space.
 - **TargetEnvironment**: Comma delimited list of environments to add this target to.
 - **TargetRole**: Comma delimited list of roles to add to this target.
-- **TargetWorkerPool**: Comma delimited list of worker pools to add this target to (not to be used with environment, tenant, tenant tag or role variable).
+- **TargetWorkerPool**: Comma delimited list of worker pools to add this target to (not to be used with environment, tenant, tenant tag or role variable). If this argument is supplied, the tentacle will be registered as a worker.
 - **TargetName**: Optional Target name, defaults to host.
 - **TargetTenant**: Comma delimited list of tenants to add to this target.
 - **TargetTenantTag**: Comma delimited list of tenant tags to add to this target.

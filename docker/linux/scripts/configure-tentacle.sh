@@ -29,6 +29,8 @@ fi
 function getPublicHostName() {
 	if [[ "$PublicHostNameConfiguration" == "PublicIp" ]]; then
 		curl https://api.ipify.org/
+	elif [[ "$PublicHostNameConfiguration" == "PrivateIp" ]]; then
+		hostname -I
 	elif [[ "$PublicHostNameConfiguration" == "FQDN" ]]; then
 		hostname --fqdn
 	elif [[ "$PublicHostNameConfiguration" == "ComputerName" ]]; then
