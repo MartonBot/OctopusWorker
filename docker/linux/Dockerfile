@@ -33,6 +33,7 @@ RUN sudo apt-get install -y kubectl
 # Download the Helm repository public signing key and add the Helm repository
 RUN curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
 RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+RUN sudo apt-get update
 
 # Install Helm
 RUN sudo apt-get install helm
