@@ -38,6 +38,13 @@ RUN sudo apt-get update
 # Install Helm
 RUN sudo apt-get install helm
 
+# Install Postgres client tools
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" >>  /etc/apt/sources.list.d/pgdg.list
+RUN sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+RUN sudo apt-get update
+RUN sudo apt-get install -y postgresql-client
+
 # end of software installation
 
 EXPOSE 10933
