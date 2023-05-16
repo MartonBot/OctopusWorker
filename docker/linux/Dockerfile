@@ -22,6 +22,9 @@ RUN pwsh -Command "& {Install-Module az -Scope AllUsers -Force}" > /tmp/azModule
 # Install Az cli
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
+# Allow dynamic installation of Az extensions
+RUN az config set extension.use_dynamic_install=yes_without_prompt
+
 # Download the Google Cloud public signing key
 RUN sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 
