@@ -48,6 +48,18 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo 
 RUN sudo apt-get update
 RUN sudo apt-get install -y postgresql-client
 
+# Install AzCopy
+# Download and extract
+RUN wget https://aka.ms/downloadazcopy-v10-linux
+RUN tar -xvf downloadazcopy-v10-linux
+# Move AzCopy
+RUN sudo rm -f /usr/bin/azcopy
+RUN sudo cp ./azcopy_linux_amd64_*/azcopy /usr/bin/
+RUN sudo chmod 755 /usr/bin/azcopy
+# Clean the kitchen
+RUN rm -f downloadazcopy-v10-linux
+RUN rm -rf ./azcopy_linux_amd64_*/
+
 # end of software installation
 
 EXPOSE 10933
