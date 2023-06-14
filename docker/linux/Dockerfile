@@ -27,10 +27,10 @@ RUN curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 RUN az config set extension.use_dynamic_install=yes_without_prompt
 
 # Download the Google Cloud public signing key
-RUN sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+RUN curl -sS https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/kubernetes-archive-keyring.gpg
 
 # Add the Kubernetes apt repository, update and install kubectl
-RUN echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+RUN echo "deb [signed-by=/etc/apt/trusted.gpg.d/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 RUN sudo apt-get update
 RUN sudo apt-get install -y kubectl
 
