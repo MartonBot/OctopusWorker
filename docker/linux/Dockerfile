@@ -16,8 +16,9 @@ RUN sudo dpkg -i packages-microsoft-prod.deb
 RUN sudo apt-get update
 RUN sudo apt-get install -y powershell
 
-# Install az module
+# Install az modules
 RUN pwsh -Command "& {Install-Module az -Scope AllUsers -Force}" > /tmp/azModuleInstall.log
+RUN pwsh -Command "& {Install-Module Az.App -Scope AllUsers -Force}" > /tmp/azAppModuleInstall.log
 
 # Install Az cli
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
