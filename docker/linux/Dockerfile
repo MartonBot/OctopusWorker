@@ -32,7 +32,7 @@ RUN curl -sS https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearm
 # Add the Kubernetes apt repository, update and install kubectl
 RUN echo "deb [signed-by=/etc/apt/trusted.gpg.d/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 RUN sudo apt-get update
-RUN sudo apt-get install -y kubectl
+RUN sudo apt-get install -y kubectl=1.27.1-00
 
 # Download the Helm repository public signing key and add the Helm repository
 RUN curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
