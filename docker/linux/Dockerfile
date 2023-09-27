@@ -19,6 +19,7 @@ RUN sudo apt-get install -y powershell
 # Install az modules
 RUN pwsh -Command "& {Install-Module az -Scope AllUsers -Force}" > /tmp/azModuleInstall.log
 RUN pwsh -Command "& {Install-Module Az.App -Scope AllUsers -Force}" > /tmp/azAppModuleInstall.log
+RUN pwsh -Command "& {Install-Module AzTable -Scope AllUsers -Force}" > /tmp/azAppModuleInstall.log
 
 # Install Az cli
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
